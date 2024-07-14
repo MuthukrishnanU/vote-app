@@ -38,5 +38,11 @@ export class ResultPageComponentComponent implements OnInit {
     });
     console.log(regFemaleSort);
     this.bestDressedFemale = regFemaleSort.at(-1).name || regFemaleSort[regFemaleSort.length - 1].name;
+    if(regMaleSort[regMaleSort.length - 1].gotVotes.length==0){
+      this.bestDressedMale = 'BestDressedMale';
+    }
+    if(regFemaleSort[regFemaleSort.length - 1].gotVotes.length==0){
+      this.bestDressedFemale = 'BestDressedFemale';
+    }
   }
 }
