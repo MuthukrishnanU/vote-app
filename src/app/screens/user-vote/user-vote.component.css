@@ -1,0 +1,36 @@
+.voteContainer{
+    background-color: #032663;
+    color: #F7EA6A;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.voteContainer .card{
+    background-color: #032663 !important;
+    color: #F7EA6A !important;
+}
+.voteContainer form{
+    border: none;
+}
+.voteContainer form label{
+    font-weight: bolder;
+}
+.voteBtn{
+    background-color: #fc03f4;
+    color: #032663;
+    border-radius: 5px;
+    border: 1px solid #fc03f4;
+    font-weight: bolder;
+}
+.form-error{
+    color: red;
+}
+.orangeText{
+    color: orangered;
+    font-weight: 600;
+}
+.noteStyle{
+    color: red;
+}

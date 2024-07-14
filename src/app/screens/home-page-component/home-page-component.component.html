@@ -1,0 +1,25 @@
+<div id="carouselInterval" class="carousel slide" data-bs-ride="carousel">
+    @if(slideId==1){
+        <div class="welcome-slide slideOne pt-4">
+            <img id="welcomeImg" src="welcome.png" alt="Welcome">
+            <h1 class="mb-4 text-center">to the app for beautiful people!</h1>
+            <h2 class="mb-4 text-center">Which means... <span id="animateAll">all of us...</span></h2>
+            <button class="welcome-button" (click)="toSlideTwo()">But <i class="bi bi-arrow-right"></i></button>
+        </div>
+    }
+    @if(slideId==2){
+        <div class="welcome-slide slideTwo pt-4">
+            <img id="tbbtImg" class="mb-4 tbbtBorder" src="tbbt.gif" alt="Since social convention dictates us to">
+            <h1 class="mb-4 text-center">choose a "Best Dressed" person <span id="animateOnceYr">only once a year</span></h1>
+            <button class="welcome-button" (click)="toSlideThree()">So <i class="bi bi-arrow-right"></i></button>
+        </div>
+    }
+    @if(slideId==3){
+        <div class="welcome-slide slideThree pt-4">
+            <h1 class="mb-4 text-center">Let's participate in a similar event..</h1>
+            <h2 class="mb-4 text-center">To <span id="animateRespect">respect the privacy</span> of your opinion; please login to cast your vote..</h2>
+            <i class="arrow-down mb-4" style="font-size: 25vh"></i>
+            <button class="welcome-button mt-5" (click)="goToLogin()">Login To Vote</button>
+        </div>
+    }
+</div>

@@ -1,0 +1,35 @@
+<div class="voteContainer">
+    <div class="voteHeader mb-4 text-center">
+        <p>Hi {{loggedInUserDetails.name}}!</p>
+        @if(loggedInUserDetails.hasVoted){
+            <p class="mb-2 orangeText">It seems you have already given your vote. Please proceed if you wish to update the vote.</p>
+            <h3 class="mb-2 noteStyle">NOTE: You can update your choices until the results are declared!</h3>
+        }
+        @else{
+            <p class="mb-2">It seems you have not yet given your vote. Please proceed to vote your choice.</p>
+        }
+    </div>
+    <div class="voteForm mb-4">
+        <form class="card" [formGroup]="voteForm" (ngSubmit)="onVote()">
+            <label for="maleChoice">Your Male Choice: </label>
+            <select id="maleChoice" formControlName="maleChoice">
+                @for(usr of registeredMaleList; track usr.employeeId){
+                    <option value={{usr.employeeId}}>{{usr.name}}</option>
+                }
+            </select>
+            <label for="femaleChoice">Your Female Choice: </label>
+            <select id="femaleChoice" formControlName="femaleChoice">
+                @for(usr of registeredFemaleList; track usr.employeeId){
+                    <option value={{usr.employeeId}}>{{usr.name}}</option>
+                }
+            </select>
+            <button type="submit" class="mt-3 voteBtn">VOTE</button>
+        </form>
+    </div>
+    @if(maleChoiceErr){
+        <p class="form-error">Please enter a "Best Dressed" Male of your choice</p>
+    }
+    @if(femaleChoiceErr){
+        <p class="form-error">Please enter a "Best Dressed" Female of your choice</p>
+    }
+</div>

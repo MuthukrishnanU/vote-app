@@ -1,0 +1,10 @@
+<div class="ackContainer">
+    <h1 id="congrats">Congratulations!</h1>
+    <p>Your vote has been registered successfully</p>
+    @if(canViewResults){
+        <button (click)="viewResults()" class="view-results-button">View Results</button>
+    }
+    @else{
+        <p>Please wait until results are announced!</p>
+    }
+</div>

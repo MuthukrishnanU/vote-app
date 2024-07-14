@@ -1,0 +1,74 @@
+.navRow{
+    background-color: #333;
+    color: #ccc;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+}
+.navLeft, .navRight, .navMid{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navItem{
+    width: auto;
+    margin: 5px 10px;
+}
+.textDecorationNone{
+    text-decoration: none;
+}
+.textAlignCenter{
+    text-align: center;
+}
+@media only screen and (max-width: 600px) {
+    .bi-list{
+        display: block;
+    }
+    .navItemRight{
+        display: none;
+    }
+}
+@media only screen and (min-width: 601px) {
+    .bi-list{
+        display: none;
+    }
+}
+.w3-sidebar{
+    height:100%;
+    width:200px;
+    background-color:#e7d5d5;
+    position:fixed!important;
+    z-index:1;
+    overflow:auto;
+    right: 0px;
+}
+#mySidebar a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    font-weight: 600;
+    font-size: 20px;
+}
+.w3-animate-right{
+    position:relative;
+    animation: animateright 1s;
+}
+@keyframes animateright{
+    from{right:-300px;opacity:0}
+    to{right:0;opacity:1}
+}
+.modal-dialog{
+    top: 30% !important;
+}
+.modal-footer button{
+    margin: auto;
+}
+#teamsStyle{
+    color: #aa0aaa;
+    font-weight: 600;
+}
+#whatsAppStyle{
+    color: #15b615;
+    font-weight: 600;
+}

@@ -1,0 +1,94 @@
+#carouselInterval{
+    background-color: #032663;
+    color: #F7EA6A;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.carousel-item{
+    align-items: center;
+    justify-content: center;
+}
+.welcome-slide{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#animateAll{
+    animation: increaseAll 5s infinite;
+}
+@keyframes increaseAll{
+    50% {
+        font-size: 110%;
+        text-transform: uppercase;
+        color: #fc0324;
+    }
+}
+#animateOnceYr, #animateRespect{
+    animation: underlineOnce 5s infinite;
+}
+@keyframes underlineOnce{
+    50% {
+        text-decoration: underline;
+        color: #fc0324;
+    }
+}
+.bi-arrow-down{
+    animation: highlightDownArrow 5s infinite;
+}
+@keyframes highlightDownArrow{
+    50%{
+        border: 5px solid orange;
+    }
+}
+.welcome-button{
+    background-color: #fc03f4;
+    border: 1px solid #fc03f4;
+    color: #032663;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 25vw;
+}
+.tbbtBorder{
+    border: 5px solid;
+    border-radius: 10px;
+}
+@media only screen and (max-width: 470px){
+    #welcomeImg{
+        width: 90vw;
+    }
+}
+@media only screen and (max-width: 410px){
+    #tbbtImg{
+        width: 90vw;
+        height: 234px;
+    }
+}
+i.arrow-down{
+    color: #fc03f4;
+    width:  0.5em;
+    height:  0.7em;
+    display:  inline-block;
+    position:  relative;
+    background:  currentColor;
+    vertical-align: top;
+    border-radius: 10px;
+    animation: arrowHighlight 5s infinite;
+  }
+  i.arrow-down:after{
+    border-right:  0.5em solid transparent;
+    border-left:  0.5em solid transparent;
+    border-top:  0.4em solid currentColor;
+    position:  absolute;
+    content:  "";
+    bottom:  -0.3em;
+    left:  -0.25em;
+  }
+  @keyframes arrowHighlight{
+    0%{color:#fc03f4;}
+    50%{color: orange;}
+    75%{color: yellow;}
+    100%{color: red;}
+  }

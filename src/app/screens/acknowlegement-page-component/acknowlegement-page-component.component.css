@@ -1,0 +1,26 @@
+.ackContainer{
+    background-color: #032663;
+    color: #F7EA6A;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.view-results-button{
+    background-color: #fc03f4;
+    border: 1px solid #fc03f4;
+    color: #032663;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 25vw;
+}
+#congrats{
+    animation: congrats 5s infinite;
+}
+@keyframes congrats{
+    50% {
+        font-weight: 600;
+        color: #20fc03;
+    }
+}
