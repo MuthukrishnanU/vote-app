@@ -18,7 +18,7 @@ export class ResultPageComponentComponent implements OnInit {
   registeredFemaleList : any = {};
   userAuthService = inject(UserAuthServiceService);
   ngOnInit(): void {
-    this.registeredUserIdList = this.userAuthService.getRegisteredUsersIdList();
+    /*this.registeredUserIdList = this.userAuthService.getRegisteredUsersIdList();
     this.registeredUserList = this.userAuthService.getRegisteredUsersList();
     this.registeredMaleList = this.registeredUserList.filter((usr:any) => usr.gender=='Male');
     this.registeredFemaleList = this.registeredUserList.filter((usr:any) => usr.gender=='Female');
@@ -43,6 +43,16 @@ export class ResultPageComponentComponent implements OnInit {
     }
     if(regFemaleSort[regFemaleSort.length - 1].gotVotes.length==0){
       this.bestDressedFemale = 'BestDressedFemale';
-    }
+    }*/
+    this.userAuthService.callResults().subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.bestDressedMale = res.bestDressedMale;
+        this.bestDressedFemale = res.bestDressedFemale;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
   }
 }

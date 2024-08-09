@@ -29,9 +29,9 @@ export class UserVoteComponent implements OnInit {
   registeredUserList : User[] = [];
   ngOnInit(): void {
     this.loggedInUser = this.userAuthService.getLoggedInUser();
-    this.loggedInUserDetails = this.userAuthService.getLoggedInUserDetails();
-    this.registeredUserIdList = this.userAuthService.getRegisteredUsersIdList();
+    this.userAuthService.loggedInUserDetail.subscribe(data => this.loggedInUserDetails = data);
     this.registeredUserList = this.userAuthService.getRegisteredUsersList();
+    this.registeredUserIdList = this.userAuthService.getRegisteredUsersIdList();
     if(!this.loggedInUser || !this.loggedInUserDetails){
       localStorage.removeItem('isLogIn');
       this.router.navigateByUrl('login');
@@ -48,6 +48,17 @@ export class UserVoteComponent implements OnInit {
       this.maleChoiceErr = true;
     }
     if(!!this.voteForm.value.maleChoice && !!this.voteForm.value.femaleChoice){
+      this.userAuthService.callVote({"employeeId": this.loggedInUserDetails.employeeId, "maleChoice": this.voteForm.value.maleChoice, "femaleChoice": this.voteForm.value.femaleChoice}).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.router.navigateByUrl('ack');
+        },
+        error: (error: any) => {
+          console.log(error);
+        }
+      });
+    }
+    /*if(!!this.voteForm.value.maleChoice && !!this.voteForm.value.femaleChoice){
       if(!this.loggedInUserDetails.hasVoted){
         this.registeredUserList.forEach(u => {
           if(u.employeeId==this.voteForm.value.maleChoice){
@@ -82,6 +93,6 @@ export class UserVoteComponent implements OnInit {
         console.log(this.registeredUserList);
         this.router.navigateByUrl('ack');
       }
-    }
+    }*/
   }
 }

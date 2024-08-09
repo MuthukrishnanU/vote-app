@@ -22,16 +22,30 @@ export class UserRegisterComponent implements OnInit {
   router = inject(Router);
   formErr = false;
   userAlreadyExists = false;
+  userNotFound = this.userAuthService.userNotFound || false;
   registeredUserIdList : String[] | undefined = [];
   registeredUserList : User[] = [];
   ngOnInit(): void {
     this.registeredUserIdList = this.userAuthService.getRegisteredUsersIdList();
     this.registeredUserList = this.userAuthService.getRegisteredUsersList();
+    this.userNotFound = this.userAuthService.userNotFound;
   }
   onRegister(){
     console.log(this.registerForm.value);
     if(this.registerForm.valid){
-      let regInUserDtls = this.registeredUserList.filter(item => item.employeeId==this.registerForm.value.employeeId);
+      this.userAuthService.callRegister({'employeeId': this.registerForm.value.employeeId?.toString(), 'name': this.registerForm.value.employeeName, 'password': this.registerForm.value.employeePassword, 'gender': this.registerForm.value.employeeGender }).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.router.navigateByUrl('login');
+        },
+        error: (error: any) => {
+          console.log(error);
+          if(error.error.error == 'UAE'){
+            this.userAlreadyExists = true;
+          }
+        }
+      });
+      /*let regInUserDtls = this.registeredUserList.filter(item => item.employeeId==this.registerForm.value.employeeId);
       if(regInUserDtls.length > 0){
         this.userAlreadyExists = true;
       }
@@ -46,7 +60,7 @@ export class UserRegisterComponent implements OnInit {
         };
         this.registeredUserList.push(tmpRegObj);
         this.router.navigateByUrl('login');
-      }
+      }*/
     }
     else{
       this.formErr = true;

@@ -29,7 +29,33 @@ export class UserLoginComponent {
     this.employeeIdErr = (!this.loginForm.value.employeeId || this.loginForm.value.employeeId.length < 5);
     this.passwordErr = (!this.loginForm.value.employeePassword || this.loginForm.value.employeePassword.length < 5);
     this.logInUser = this.loginForm.value.employeeId?.toString()!;
-    this.registeredUserIdList = this.userAuthService.getRegisteredUsersIdList();
+    if(!this.employeeIdErr && !this.passwordErr){
+      this.userAuthService.callLogin({"employeeId": this.loginForm.value.employeeId+"", "password": this.loginForm.value.employeePassword+""}).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          if(!!res.loginUserDetail){
+            this.userAuthService.setLoggedInUser(res.loginUserDetail[0].employeeId+"");
+            this.userAuthService.setUserLoggedIn();
+            this.userAuthService.setLoggedInUserDetail({"employeeId": res.loginUserDetail[0].employeeId, "name": res.loginUserDetail[0].name, "gender": res.loginUserDetail[0].gender, "hasVoted": res.loginUserDetail[0].hasVoted });
+            this.userAuthService.canViewResults.next(res.viewResultVal);
+            this.userAuthService.setRegisteredUsersList(res.updatedVotersArr);
+            localStorage.setItem('isLogIn', 'true');
+            this.router.navigateByUrl('vote');
+          }
+        },
+        error: (error) => {
+          console.log(error);
+          if(error.error.error && error.error.error=='UNF'){
+            this.userAuthService.setUserNotFound();
+            this.router.navigateByUrl('register');
+          }
+          if(error.error.error && error.error.error=='LPM'){
+            this.passwordUnmatchedErr = true;
+          }
+        }
+      });
+    }
+    /*this.registeredUserIdList = this.userAuthService.getRegisteredUsersIdList();
     this.registeredUserList = this.userAuthService.getRegisteredUsersList();
     console.log(this.registeredUserIdList);
     console.log(this.registeredUserList);
@@ -52,6 +78,6 @@ export class UserLoginComponent {
         this.userAuthService.setUserNotFound();
         this.router.navigateByUrl('register');
       }
-    }
+    }*/
   }
 }
