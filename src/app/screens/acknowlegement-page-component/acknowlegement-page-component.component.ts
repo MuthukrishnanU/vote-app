@@ -14,8 +14,6 @@ export class AcknowlegementPageComponentComponent implements OnInit {
   router = inject(Router);
   userAuthService = inject(UserAuthServiceService)
   canViewResults = false;
-  registeredUserIdList : String[] | undefined = [];
-  registeredUserList : User[] = [];
   constructor(){
     this.userAuthService.canViewResults.subscribe(val => this.canViewResults = val);
   }
@@ -23,10 +21,6 @@ export class AcknowlegementPageComponentComponent implements OnInit {
     this.router.navigateByUrl('results');
   }
   ngOnInit(): void {
-    this.registeredUserIdList = this.userAuthService.getRegisteredUsersIdList();
-    this.registeredUserList = this.userAuthService.getRegisteredUsersList();
     console.log('Acknowledgement Screen');
-    console.log(this.registeredUserIdList);
-    console.log(this.registeredUserList);
   }
 }
