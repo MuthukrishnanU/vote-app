@@ -17,6 +17,7 @@ export class UserAuthServiceService {
   resTime = (new Date()).getHours() > 17;
   canViewResults = new BehaviorSubject<boolean>(this.resTime);
   loader = new BehaviorSubject<boolean>(false);
+  loaderSig = signal(false);
   get isUserLoginAuth() : boolean{
     let isLogIn = localStorage.getItem('isLogIn');
     return (this.loggedInUser() || isLogIn) ? true: false

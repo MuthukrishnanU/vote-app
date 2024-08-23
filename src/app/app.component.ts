@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   isUserLoggedIn = false;
   canViewResults = false;
   loader = false;
+  loaderSigVal = this.userAuthService.loaderSig;
   constructor(){
     this.userAuthService.isUserLoggedIn.subscribe(val => this.isUserLoggedIn = val);
     this.userAuthService.canViewResults.subscribe(val =>this.canViewResults = val);
