@@ -17,6 +17,7 @@ export class ResultPageComponentComponent implements OnInit {
   registeredMaleList : any = {};
   registeredFemaleList : any = {};
   userAuthService = inject(UserAuthServiceService);
+  constructor(){this.userAuthService.showLoader()}
   ngOnInit(): void {
     /*this.registeredUserIdList = this.userAuthService.getRegisteredUsersIdList();
     this.registeredUserList = this.userAuthService.getRegisteredUsersList();
@@ -47,11 +48,13 @@ export class ResultPageComponentComponent implements OnInit {
     this.userAuthService.callResults().subscribe({
       next: (res: any) => {
         console.log(res);
+        this.userAuthService.hideLoader();
         this.bestDressedMale = res.bestDressedMale;
         this.bestDressedFemale = res.bestDressedFemale;
       },
       error: (error: any) => {
         console.log(error);
+        this.userAuthService.hideLoader();
       }
     });
   }

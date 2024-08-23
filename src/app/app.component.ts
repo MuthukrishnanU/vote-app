@@ -19,9 +19,11 @@ export class AppComponent implements OnInit {
   router = inject(Router);
   isUserLoggedIn = false;
   canViewResults = false;
+  loader = false;
   constructor(){
     this.userAuthService.isUserLoggedIn.subscribe(val => this.isUserLoggedIn = val);
     this.userAuthService.canViewResults.subscribe(val =>this.canViewResults = val);
+    this.userAuthService.loader.subscribe(val =>this.loader = val);
   }
   contactUs(){
     console.log('Please contact Muthukrishnan in +919769608204 or ping him at 1040046');
@@ -64,5 +66,10 @@ export class AppComponent implements OnInit {
       localStorage.removeItem('isLogIn');
       this.router.navigateByUrl('login');
     }
+    document.addEventListener('click', (e:any) => {
+      if(e.target?.id!=='mySidebar' && e.target?.className!=='textDecorationNone' && e.target?.className!=='bi bi-list navItem'){
+        this.displaySidebar = false;
+      }
+    });
   }
 }

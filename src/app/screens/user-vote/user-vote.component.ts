@@ -48,13 +48,16 @@ export class UserVoteComponent implements OnInit {
       this.maleChoiceErr = true;
     }
     if(!!this.voteForm.value.maleChoice && !!this.voteForm.value.femaleChoice){
+      this.userAuthService.showLoader();
       this.userAuthService.callVote({"employeeId": this.loggedInUserDetails.employeeId, "maleChoice": this.voteForm.value.maleChoice, "femaleChoice": this.voteForm.value.femaleChoice}).subscribe({
         next: (res: any) => {
           console.log(res);
+          this.userAuthService.hideLoader();
           this.router.navigateByUrl('ack');
         },
         error: (error: any) => {
           console.log(error);
+          this.userAuthService.hideLoader();
         }
       });
     }

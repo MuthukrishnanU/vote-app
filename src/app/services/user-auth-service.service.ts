@@ -16,6 +16,7 @@ export class UserAuthServiceService {
   loggedInUser = signal('');
   resTime = (new Date()).getHours() > 17;
   canViewResults = new BehaviorSubject<boolean>(this.resTime);
+  loader = new BehaviorSubject<boolean>(false);
   get isUserLoginAuth() : boolean{
     let isLogIn = localStorage.getItem('isLogIn');
     return (this.loggedInUser() || isLogIn) ? true: false
@@ -45,6 +46,8 @@ export class UserAuthServiceService {
   setLoggedInUser(user: any){ this.loggedInUser.set(user) }
   getLoggedInUser(){ return this.loggedInUser() }
   getLoggedInUserDetails(){ return this.registeredUsersListWhole.find(usr => usr.employeeId==this.loggedInUser()) }
+  showLoader(){this.loader.next(true)}
+  hideLoader(){this.loader.next(false)}
   beUrl = 'https://voteappbe.onrender.com/api';
   callLogin(req: any){
     //API call to /login

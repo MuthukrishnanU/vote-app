@@ -30,9 +30,11 @@ export class UserLoginComponent {
     this.passwordErr = (!this.loginForm.value.employeePassword || this.loginForm.value.employeePassword.length < 5);
     this.logInUser = this.loginForm.value.employeeId?.toString()!;
     if(!this.employeeIdErr && !this.passwordErr){
+      this.userAuthService.showLoader();
       this.userAuthService.callLogin({"employeeId": this.loginForm.value.employeeId+"", "password": this.loginForm.value.employeePassword+""}).subscribe({
         next: (res: any) => {
           console.log(res);
+          this.userAuthService.hideLoader();
           if(!!res.loginUserDetail){
             this.userAuthService.setLoggedInUser(res.loginUserDetail[0].employeeId+"");
             this.userAuthService.setUserLoggedIn();
@@ -45,6 +47,7 @@ export class UserLoginComponent {
         },
         error: (error) => {
           console.log(error);
+          this.userAuthService.hideLoader();
           if(error.error.error && error.error.error=='UNF'){
             this.userAuthService.setUserNotFound();
             this.router.navigateByUrl('register');

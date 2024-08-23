@@ -33,13 +33,16 @@ export class UserRegisterComponent implements OnInit {
   onRegister(){
     console.log(this.registerForm.value);
     if(this.registerForm.valid){
+      this.userAuthService.showLoader();
       this.userAuthService.callRegister({'employeeId': this.registerForm.value.employeeId?.toString(), 'name': this.registerForm.value.employeeName, 'password': this.registerForm.value.employeePassword, 'gender': this.registerForm.value.employeeGender }).subscribe({
         next: (res: any) => {
           console.log(res);
+          this.userAuthService.hideLoader();
           this.router.navigateByUrl('login');
         },
         error: (error: any) => {
           console.log(error);
+          this.userAuthService.hideLoader();
           if(error.error.error == 'UAE'){
             this.userAlreadyExists = true;
           }
